@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+  db:
+    image: postgres:13-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    ports:
+      - '5432:5432'
+    volumes: 
+      - db:/var/lib/postgresql/data
+  
+# the name flag is a hack to change the default prepend folder
+# name when outputting the image names
+networks: 
+  cruddur-net:
+    driver: bridge
+    name: cruddur-net
+
+volumes:
+  db:
+    driver: local
